@@ -53,12 +53,12 @@ public class Main extends Application {
         Label label = new Label();
         label.setText("Welcome!");
         label.setWrapText(true);
-        Button seqAPIBtn = new Button();
-        seqAPIBtn.setText("GET Data SEQ From APIs");
-        seqAPIBtn.setOnAction(new EventHandler<ActionEvent>() {
+        Button ThreadAPIBtn = new Button();
+        ThreadAPIBtn.setText("GET Data by threads From APIs");
+        ThreadAPIBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // SEQ
+                // Thread
                 dataHold = new ThreadAPI().getData(intArray);
                 for (int i = 0; i < dataHold.length; i++) {
                     System.out.println(dataHold[i]);
@@ -66,39 +66,39 @@ public class Main extends Application {
                 label.setText(String.join(",", dataHold));
             }
         }   );
-        Button seqSotreBtn = new Button();
-        seqSotreBtn.setText("STORE Data SEQ To DB");
-        seqSotreBtn.setOnAction(new EventHandler<ActionEvent>() {
+        Button ThreadSotreBtn = new Button();
+        ThreadSotreBtn.setText("STORE Data by threads To DB");
+        ThreadSotreBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // SEQ
-                conn = new SeqDB().connectDB();
+                // Thread
+                conn = new ThreadDB().connectDB();
                 if(conn == null) System.exit(1);
-                new SeqDB().storeData(conn, headers, dataHold);
+                new ThreadDB().storeData(conn, headers, dataHold);
                 dataHold = new String[]{};
                 label.setText("empty*");
             }
         });
-        Button seqRetriveBtn = new Button();
-        seqRetriveBtn.setText("Retrive Data SEQ From DB");
-        seqRetriveBtn.setOnAction(new EventHandler<ActionEvent>() {
+        Button ThreadRetriveBtn = new Button();
+        ThreadRetriveBtn.setText("Retrive Data by Threads From DB");
+        ThreadRetriveBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // SEQ
-                conn = new SeqDB().connectDB();
+                // Thread
+                conn = new ThreadDB().connectDB();
                 if(conn == null) System.exit(1);
-                dataHold = new SeqDB().retriveData(conn);
+                dataHold = new ThreadDB().retriveData(conn);
                 label.setText(String.join(",", dataHold));
             }
         });
         
         //Button Width
-        seqAPIBtn.setMaxSize(170, 30);
-        seqSotreBtn.setMaxSize(170, 30);
-        seqRetriveBtn.setMaxSize(170, 30);
-        seqAPIBtn.setMinSize(170, 30);
-        seqSotreBtn.setMinSize(170, 30);
-        seqRetriveBtn.setMinSize(170, 30);
+        ThreadAPIBtn.setMaxSize(200, 30);
+        ThreadSotreBtn.setMaxSize(200, 30);
+        ThreadRetriveBtn.setMaxSize(200, 30);
+        ThreadAPIBtn.setMinSize(200, 30);
+        ThreadSotreBtn.setMinSize(200, 30);
+        ThreadRetriveBtn.setMinSize(200, 30);
         
         
         //Creating a Grid Pane 
@@ -115,9 +115,9 @@ public class Main extends Application {
         gridPane.setAlignment(Pos.TOP_LEFT);
         
         //Arranging all the nodes in the grid 
-        gridPane.add(seqAPIBtn, 0, 0);
-        gridPane.add(seqSotreBtn, 0, 1);
-        gridPane.add(seqRetriveBtn, 0, 2);
+        gridPane.add(ThreadAPIBtn, 0, 0);
+        gridPane.add(ThreadSotreBtn, 0, 1);
+        gridPane.add(ThreadRetriveBtn, 0, 2);
         gridPane.add(label, 1, 0);
         
         
