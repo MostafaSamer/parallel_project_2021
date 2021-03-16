@@ -54,12 +54,12 @@ public class Main extends Application {
         label.setText("Welcome!");
         label.setWrapText(true);
         Button seqAPIBtn = new Button();
-        seqAPIBtn.setText("GET Data SEQ From APIs");
+        seqAPIBtn.setText("GET Data With RX From APIs");
         seqAPIBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 // SEQ
-                dataHold = new SeqAPI().getData(intArray);
+                dataHold = new RXAPI().getData(intArray);
                 for (int i = 0; i < dataHold.size(); i++) {
                     System.out.println(dataHold.get(i));
                 }
@@ -67,25 +67,25 @@ public class Main extends Application {
             }
         });
         Button seqSotreBtn = new Button();
-        seqSotreBtn.setText("STORE Data SEQ To DB");
+        seqSotreBtn.setText("STORE Data With RX To DB");
         seqSotreBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 // SEQ
-                conn = new SeqDB().connectDB();
+                conn = new RXDB().connectDB();
                 if(conn == null) System.exit(1);
-                new SeqDB().storeData(conn, headers, dataHold);
+                new RXDB().storeData(conn, headers, dataHold);
                 dataHold = new ArrayList<>();
                 label.setText("empty*");
             }
         });
         Button seqRetriveBtn = new Button();
-        seqRetriveBtn.setText("Retrive Data SEQ From DB");
+        seqRetriveBtn.setText("Retrive Data With RX From DB");
         seqRetriveBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 // SEQ
-                conn = new SeqDB().connectDB();
+                conn = new RXDB().connectDB();
                 if(conn == null) System.exit(1);
                // dataHold = new SeqDB().retriveData(conn);
                 label.setText(String.join(",", dataHold));
